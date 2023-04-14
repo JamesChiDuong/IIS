@@ -1,1 +1,2 @@
 - Store the UART module, Receiver,Transmitter,FIFO, baud rate module
+- Run the makefile to compile
