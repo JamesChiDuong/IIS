@@ -10,5 +10,7 @@ Each part will comunicate via UART protocol and open the Pseudo Teminal
 **The command to combine and Run the code**
 - Compile and Run the files in the rtl file: make rtl
 - Compile and Run the files in the bench folder: make bench
-- Compile and Run the files in the cpp folder: make test
+- Compile and Run the files in the cpp folder: make tes
+
+
 Reference: https://github.com/ZipCPU/wbuart32
