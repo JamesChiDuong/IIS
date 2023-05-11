@@ -15,4 +15,8 @@ Each part will comunicate via UART protocol and open the Pseudo Teminal
 **The Process to Test**
 - After run the make test, the program will be opened the port with the name /dev/pts/
 - We need to open the new terminal and run the python script with the command: python3 Test_Data_Receiver.py
+
+**The Picture to descible the processing**
+
+![picture drawio](https://github.com/JamesChiDuong/IIS/assets/105403916/484b09ca-0ab1-4387-b038-e182fe2d863d)
 Reference: https://github.com/ZipCPU/wbuart32
