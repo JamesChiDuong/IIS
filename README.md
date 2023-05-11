@@ -10,7 +10,9 @@ Each part will comunicate via UART protocol and open the Pseudo Teminal
 **The command to combine and Run the code**
 - Compile and Run the files in the rtl file: make rtl
 - Compile and Run the files in the bench folder: make bench
-- Compile and Run the files in the cpp folder: make tes
+- Compile and Run the files in the cpp folder: make test
 
-
+**The Process to Test**
+- After run the make test, the program will be opened the port with the name /dev/pts/
+- We need to open the new terminal and run the python script with the command: python3 Test_Data_Receiver.py
 Reference: https://github.com/ZipCPU/wbuart32
