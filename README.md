@@ -23,12 +23,12 @@ The purpose of the individual folders are as follow:
   ```bash
   make TARGET=sim
   ```
-   If we want to change the top module. We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk` and `platform/cpp/cpp.mk` to change the name of the modules. 
+   If we want to change the top module. We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules. 
    
-   When we run command, the program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `build/simulation/verilog` and will run each `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waitting the test file from `/host folder` test.
+   When we run command, the program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `build/simulation/verilog` and will run `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waiting the test file from `/host` folder.
 
    `Example:`
-  | FILE                     |      RESPONSE                                                                                |
+  | TOP MODULE FILE                     |      TEST PYTHON FILE                                                                                |
   | ---------------          |     --------------------------------------------------------------------------              |
   |`./Data_Receiver`         | `python3 Test_Data_Receiver.py /dev/pts/4`                 |
   | Slave device: /dev/pts/4 | Send Data:  Hello from Python file                         |
