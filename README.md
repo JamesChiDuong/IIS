@@ -28,11 +28,15 @@ The purpose of the individual folders are as follow:
    When we run command, the program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `build/simulation/verilog` and will run `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waiting the test file from `/host` folder.
 
    `Example:`
-  | TOP MODULE FILE                     |      TEST PYTHON FILE                                                                                |
+  | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
   | ---------------          |     --------------------------------------------------------------------------              |
   |`./Data_Receiver`         | `python3 Test_Data_Receiver.py /dev/pts/4`                 |
   | Slave device: /dev/pts/4 | Send Data:  Hello from Python file                         |
-  | Received 23 bytes: Hello from Python file EOF Successfully read 23 characters: Hello from Python file Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file                                                                                    | 
+  | Received 23 bytes: Hello from Python file EOF Successfully read 23 characters: Hello from Python file Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file                                                                                    |
+  | --------------           |
+  --------------------------------------------------------------------------              |
+  | `./TranAndRecei`         | 
+
 
 
 
