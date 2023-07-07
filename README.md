@@ -39,7 +39,7 @@ The purpose of the individual folders are as follow:
     characters: Hello from 
     Python file
     Sent 23 bytes: 
-    Hello from Python file                                                                |
+    Hello from Python file   |                                                              |
 
 
 
