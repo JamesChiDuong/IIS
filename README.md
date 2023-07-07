@@ -32,7 +32,9 @@ The purpose of the individual folders are as follow:
   | ---------------          |     --------------------------------------------------------------------------              |
   |`./Data_Receiver`         | `python3 Test_Data_Receiver.py /dev/pts/4`                 |
   | Slave device: /dev/pts/4 | Send Data:  Hello from Python file                         |
-  | Received 23 bytes: Hello from Python file EOF Successfully read 23 characters: Hello from Python file Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file                                                                                    |
+  | Received 23 bytes: Hello from Python file EOF 
+  | Successfully read 23 characters: Hello from Python file| 
+  | Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file         |
 
   | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
   | ---------------          |     --------------------------------------------------------------------------              |
