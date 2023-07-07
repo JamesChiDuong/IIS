@@ -45,7 +45,7 @@ The purpose of the individual folders are as follow:
   |Sent 40 bytes:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
 PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 COUT:0    |
 
-NOTE:
+#### NOTE:
 ```bash 
    If we want to change the top module. We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules.
 ```
