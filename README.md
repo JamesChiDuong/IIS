@@ -38,8 +38,8 @@ The purpose of the individual folders are as follow:
   | ---------------          |     --------------------------------------------------------------------------              |
   |`./TranAndRecei`          | `python3 Test_TranAndRecei.py /dev/pts/4`                 |
   | Slave device: /dev/pts/4 | Send Data:  Hello from Python file                         |
-  | Received 9 bytes: 110 101 EOF
-Successfully read 40 characters:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
+  | Received 9 bytes: 110 101 EOF |
+  |Successfully read 40 characters:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
 Sent 40 bytes:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
 PASS! |Received Data:  Hello from Python file                                                                                    |
 
