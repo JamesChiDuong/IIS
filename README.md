@@ -25,14 +25,16 @@ The purpose of the individual folders are as follow:
   ```
    Before run the command:
 
-   _-The `/modules` folder to change the top modules Verilog files_
+   - The `modules/` folder to change the top modules Verilog files
 
-   _-The `platform/cpp` to change the simulation top modules file_ 
+   - The `platform/cpp` to change the simulation top modules file
    
-   _-The `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 variable in this file._
+   - The `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 variable in this file.
 
 
-   When we run command, the program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `build/simulation/verilog` and will run `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waiting the test file from `/host` folder.
+   When we run command:
+
+   The program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `/build/simulation/verilog` and will run `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waiting the test file from `host/` folder.
 
    `Example 1:`
   | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
@@ -62,7 +64,22 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
   ```
 
   Before run the command:
-   _- Plug the FPGA board_
-   _We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 in this file._
+   - Make sure you have already installed follow `modules/FPGA/tools.mk`
+
+   - Plug the FPGA board
+
+   - The `modules/FPGA/parameter.mk` to change the package following your FPGA. Example: my FPGA board is Artix-7 with package csg324
+   
+   - The `modules/FPGA/Xilinx/models` to change the Xilinx model.Example: my FPGA boatd is xc7a100tcsg324-1 model
+
+   - The `modules/FPGA/Xilinx/pin_artix7_100t.xdc` to configure the pin planner for your FPGA
+
+   - Another files in `modules/FPGA/Xilinx/timing__` to create the clock for FPGA, we don't need to change
+
+   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data Receiver is a top modules. I only change the name of top module at TOPMODULE variable and delete the fullAdder.v at MODULESTOPSRC variable  
+
+
   
-  When we run command, the program will generate the `build/Artycs324g/Top_moduleName/src` and `build/results`. The `build/Artycs324g/Top_moduleName/src` has all the Verilog files on your project. The `build/results` has the log file which store the command line on the bash. 
+  When we run command:
+  
+  The program will generate the `build/Artycs324g/Top_moduleName/src` and `build/results`. The `build/Artycs324g/Top_moduleName/src` has all the Verilog files on your project. The `build/results` has the log file which store the command line on the bash. 
