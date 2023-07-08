@@ -14,9 +14,15 @@ The purpose of the individual folders are as follow:
 | --------------- | -------------------------------------------------------------------------- |
 | `build/`        | Build folder including generated sources, results and simulation file.                                                                      |
 | `host/`         | Python test code. It includes 2 files. The Test_Data_Receiver.py uses to     test Data_Receiver modles and the Test_TranAndRecei is used to test TranAndRecei modules                                                                    |
-| `modules/`      | User HDL code. This includes these top modules Verilog file and modules/FPGA folder. The Data_Receiver.v is the top modules with testing transfer data from keyboard and receive back the data via UART protocol. The TranAndRecei.v and fullAdder.v is the 2 modules for the purpose that we send 2 data from python test file via UART protocol, and then 2 data is the input for the full adder modules, after calculated by full adder modules, the 2 data, sum of 2 data will be sent back to the python test file via UART protocol. The modules/FPGA has some files to configure parameter to synthesis, implement, generate the bit stream and program for FPGA                                                       |
+| `modules/`      | User HDL code. This includes these top modules Verilog file and modules/FPGA folder.                                                       |
 | `platform/`     | simulation CPP code is used to simulation these top modules, include platform/cpp and platform/rtl. The folder cpp has cpp file to simulation via Verilator. The folder rtl has these modules for UART comunication                         | 
 | `Makefile`      | Top Makefile.                                          |
+
+### Example TEST
+In this source code, I will use 2 top module to test these case.
+- The Data_Receiver.v is the top modules with testing transfer data from keyboard and receive back the data via UART protocol. We can test simulation with many round
+
+- The TranAndRecei.v and fullAdder.v is the 2 modules for the purpose that we send 2 data from python test file via UART protocol. The TranAnRecei.v is a top module. The fullAdder is the additional submodule.The 2 data which is sent by Python Test files is the input for the full adder modules, after calculated by full adder modules, these data includes 2 data, sum of 2 data will be sent back to the python test file via UART protocol.
 
 ### Target 'sim':
 
@@ -76,7 +82,7 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
 
    - Another files in `modules/FPGA/Xilinx/timing__` to create the clock for FPGA, we don't need to change
 
-   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data_Receiver is a top modules. I only change the name of top module at TOPMODULE variable and delete the fullAdder.v at MODULESTOPSRC variable because in the Data_Receiver, I don't use the fullAdder module  
+   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data_Receiver is a top modules. I only change the name of top module at TOPMODULE and TOPMODULE_CHECK variable and also delete the fullAdder.v at MODULESTOP_SRC variable because in the Data_Receiver, I don't use the fullAdder module.
 
 
   
