@@ -51,18 +51,20 @@ In this source code, I will use 2 top module to test these case.
   | Received 23 bytes: Hello from Python file EOF 
   | Successfully read 23 characters: Hello from Python file| 
   | Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file         |
-  | 
+  |                          | Input data Test: out                                       |
+  | End of round             |                                                            |
 
   `Example 2:`
   | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
   | ---------------          |     --------------------------------------------------------------------------              |
-  |`./TranAndRecei`          | `python3 Test_TranAndRecei.py /dev/pts/4`                  |
+  |`./TranAndRecei`          | `python3 Test_TranAndRecei.py /dev/pts/4 110 101`          |
   | Slave device: /dev/pts/4 | Send Data:  110 101 EOF                                    |
   | Received 9 bytes:        |
   |110 101 EOF               |
   |Successfully read 40 characters:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
   |Sent 40 bytes:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
 PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 COUT:0    |
+  | We can't stop the program expect we interupt the program                             |
 
 
 ### Target 'ArtixA7':
