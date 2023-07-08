@@ -66,7 +66,7 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
   Before run the command:
    - Make sure you have already installed follow `modules/FPGA/tools.mk`
 
-   - Plug the FPGA board
+   - Plug your FPGA board
 
    - The `modules/FPGA/parameter.mk` to change the package following your FPGA. Example: my FPGA board is Artix-7 with package csg324
    
@@ -76,10 +76,24 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
 
    - Another files in `modules/FPGA/Xilinx/timing__` to create the clock for FPGA, we don't need to change
 
-   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data Receiver is a top modules. I only change the name of top module at TOPMODULE variable and delete the fullAdder.v at MODULESTOPSRC variable  
+   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data_Receiver is a top modules. I only change the name of top module at TOPMODULE variable and delete the fullAdder.v at MODULESTOPSRC variable because in the Data_Receiver, I don't use the fullAdder module  
 
 
   
   When we run command:
   
-  The program will generate the `build/Artycs324g/Top_moduleName/src` and `build/results`. The `build/Artycs324g/Top_moduleName/src` has all the Verilog files on your project. The `build/results` has the log file which store the command line on the bash. 
+  The program will generate the `build/Artycs324g/Top_moduleName/src` and `build/results`. The `build/Artycs324g/Top_moduleName/src` has all the Verilog files on your project. The `build/results` has the log file which store the command line on the bash.
+
+   `Example 1:`
+  | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
+  | ---------------          |     --------------------------------------------------------------------------              |
+  |`./Data_Receiver`         | `python3 Test_Data_Receiver.py /dev/ttyUSB1`               |
+  |                          | Send Data:  Hello from Python file                         |
+  |                          | Received Data:  Hello from Python file                     |
+
+   `Example 2:`
+  | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
+  | ---------------          |     --------------------------------------------------------------------------              |
+  |`./TranAndRecei`          | `python3 Test_TranAndRecei.py /dev/ttyUSB1`                |
+  |                          | Send Data:  110 101                                        |
+  |                          | Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 COUT:0     |
