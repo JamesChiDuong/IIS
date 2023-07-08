@@ -22,7 +22,7 @@ The purpose of the individual folders are as follow:
 In this source code, I will use 2 top module to test these case.
 - The Data_Receiver.v is the top modules with testing transfer data from keyboard and receive back the data via UART protocol. We can test simulation with many round
 
-- The TranAndRecei.v and fullAdder.v is the 2 modules for the purpose that we send 2 data from python test file via UART protocol. The TranAnRecei.v is a top module. The fullAdder is the additional submodule.The 2 data which is sent by Python Test files is the input for the full adder modules, after calculated by full adder modules, these data includes 2 data, sum of 2 data will be sent back to the python test file via UART protocol.
+- The TranAndRecei.v and fullAdder.v is the two modules for the purpose that we send two data from python test file via UART protocol. The TranAnRecei.v is a top module. The fullAdder is the additional submodule.The two data which is sent by Python Test files is the input for the full adder modules, after calculated by full adder modules, these data includes two data, sum of two data will be sent back to the python test file via UART protocol.We can test simulation one round
 
 ### Target 'sim':
 
