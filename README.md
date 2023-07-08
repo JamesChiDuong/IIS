@@ -26,7 +26,9 @@ The purpose of the individual folders are as follow:
    Before run the command:
 
    _-The `/modules` folder to change the top modules Verilog files_
+
    _-The `platform/cpp` to change the simulation top modules file_ 
+   
    _-The `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 variable in this file._
 
 
