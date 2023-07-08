@@ -22,7 +22,7 @@ The purpose of the individual folders are as follow:
 In this source code, I will use 2 top module to test these case.
 - The Data_Receiver.v is the top modules with testing transfer data from keyboard and receive back the data via UART protocol. We can test simulation with many round
 
-- The TranAndRecei.v and fullAdder.v is the two modules for the purpose that we send two data from python test file via UART protocol. The TranAnRecei.v is a top module. The fullAdder is the additional submodule.The two data which is sent by Python Test files is the input for the full adder modules, after calculated by full adder modules, these data includes two data, sum of two data will be sent back to the python test file via UART protocol.We can test simulation one round
+- The TranAndRecei.v and fullAdder.v is the two modules for the purpose that we send two data from python test file via UART protocol. The TranAnRecei.v is a top module. The fullAdder is the additional submodule.The two data which is sent by Python Test files is the input for the full adder modules, after calculated by full adder modules, these data includes two data, sum of two data will be sent back to the python test file via UART protocol.We can test simulation one round. Because the syntax for test is `Number1\nNumber2\n\n`. We will change the syntax in the python file
 
 ### Target 'sim':
 
@@ -46,10 +46,12 @@ In this source code, I will use 2 top module to test these case.
   | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
   | ---------------          |     --------------------------------------------------------------------------              |
   |`./Data_Receiver`         | `python3 Test_Data_Receiver.py /dev/pts/4`                 |
-  | Slave device: /dev/pts/4 | Send Data:  Hello from Python file                         |
+  | Slave device: /dev/pts/4 | Input data Test: Hello from Python file                    |
+  |                          | Send Data:  Hello from Python file                         |
   | Received 23 bytes: Hello from Python file EOF 
   | Successfully read 23 characters: Hello from Python file| 
   | Sent 23 bytes: Hello from Python file |Received Data:  Hello from Python file         |
+  | 
 
   `Example 2:`
   | TOP MODULE FILE          |      TEST PYTHON FILE                                      |
