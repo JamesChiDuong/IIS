@@ -2,7 +2,7 @@
 The project is a GNU Makefile project.
 The modules are written in Verilog and parameterized with built-in Verilog mechanisms, SageMath, and Python scripts.
 The makefile at the top includes targets for the top modules:
-    TranAndRecei Data_Transmitter Data Receiver.
+    TranAndRecei  Data Receiver.
 The makefile project automates the source, simulation, the synthesis, implement, generate bitstream and program the FPGA(for Xilinx devices) 
 
 The makefile structure enables the automated building process
@@ -23,6 +23,13 @@ The purpose of the individual folders are as follow:
   ```bash
   make TARGET=sim
   ```
+   Before run the command:
+
+   _-The `/modules` folder to change the top modules Verilog files_
+   _-The `platform/cpp` to change the simulation top modules file_ 
+   _-The `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 variable in this file._
+
+
    When we run command, the program will generate the `build/simulation/cpp`, `build/simulation/rtl`, `build/simulation/verilog` and will run `.mk file` of each folder. After running, the terminal will compile and run the code. It will open the pseudo-terminal and waiting the test file from `/host` folder.
 
    `Example 1:`
@@ -45,13 +52,6 @@ The purpose of the individual folders are as follow:
   |Sent 40 bytes:   NUMBER1:110 NUMBER2:101 SUM:211 COUT:0
 PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 COUT:0    |
 
-#### NOTE:
-   _If we want to change the top module. We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules._
-
-
-
-
-
 
 ### Target 'ArtixA7':
 
@@ -59,4 +59,8 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
   make TARGET=ArtixA7
   ```
 
-  To synthesis, implement, generate a bitstream and program of the FPGA project.
+  Before run the command:
+   _- Plug the FPGA board_
+   _We will go into the `/modules` folder to change the top modules Verilog files, go into `platform/cpp` to change the simulation top modules file and also go into the `modules/verilog.mk`,`platform/cpp/cpp.mk` to change the name of the modules at the MODULES and MODULES2 in this file._
+  
+  When we run command, the program will generate the `build/Artycs324g/Top_moduleName/src` and `build/results`. The `build/Artycs324g/Top_moduleName/src` has all the Verilog files on your project. The `build/results` has the log file which store the command line on the bash. 
