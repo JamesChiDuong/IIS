@@ -92,7 +92,7 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
    - To list the USB port of your device, open the terminal: `sudo ls /dev/ttyUSB*`
 
 
-# SETION 2: What needs to be changed to adapt the code for another design
+# SECTION 2: What needs to be changed to adapt the code for another design
   
   ## With TARGET=sim
 
