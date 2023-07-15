@@ -108,16 +108,15 @@ PASS!                        |  Received Data:  NUMBER1:110 NUMBER2:101 SUM:211 
 
    - Plug your FPGA board
 
-   - The `modules/FPGA/parameter.mk` to change the package following your FPGA. Example: my FPGA board is Artix-7 with package csg324
+   - The `modules/FPGA/parameter.mk` to change the package following your FPGA. 
+   Example: my FPGA board is Artix-7 with package csg324
    
-   - The `modules/FPGA/Xilinx/models` to change the Xilinx model.Example: my FPGA board is xc7a100tcsg324-1 model
+   - The `modules/FPGA/Xilinx/models` to change the Xilinx model. 
+   Example: my FPGA board is xc7a100tcsg324-1 model
 
    - The `modules/FPGA/Xilinx/pin_artix7_100t.xdc` to configure the pin planner for your FPGA
 
    - Another file in `modules/FPGA/Xilinx/timing__` to create the clock for FPGA, we don't need to change
 
-   - The `modules/modules.mk/` to change the top modules. Example: If I want to program FPGA with Data_Receiver is a top module. I only change the name of the top module at TOPMODULE and TOPMODULE_CHECK variable and also delete the fullAdder.v at MODULESTOP_SRC variable because, in the Data_Receiver, I don't use the fullAdder module.
-
-
-
-  
+   - The `modules/modules.mk/` to change the top modules. 
+   Example: If I want to program FPGA with Data_Receiver as a top module. I only change the name of the top module at TOPMODULE and TOPMODULE_CHECK variable and also delete the fullAdder.v at MODULESTOP_SRC variable because, in the Data_Receiver, I don't use the fullAdder module.
