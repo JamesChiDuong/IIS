@@ -57,27 +57,6 @@ initial begin
      tx_current_state = 3'd0;
 end
 
-// always @(posedge clk ) begin
-//     case (rx_current_state)
-//        START : begin
-//         if(((rx_data_out == 8'd45)) &&(rx_done))
-//             rx_next_state <= NUMBER1;
-//        end
-//        NUMBER1 : begin
-//         if(((rx_data_out == 8'd10)) &&(rx_done))
-//             rx_next_state <= NUMBER2;
-//        end
-//        NUMBER2 : begin
-//         rx_next_state <= STOP;
-//        end
-//        STOP: begin
-//         if((rx_done))
-//             rx_next_state <= START;
-//        end
-//         default: rx_next_state <= START;
-//     endcase
-// end
-
 always @(posedge clk ) begin
     case (rx_current_state)
        START : begin
