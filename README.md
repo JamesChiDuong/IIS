@@ -52,8 +52,11 @@ In this source code, I will use 2 top modules to test these cases.
   |We can't stop the program expect we interrupt the program |                            |
 
   `Example 2:`
-  We will use Python scripts decides which operands will be choose. We will implement with `addition, subtraction, and multiplicaton` to test with design. 
-
+  We will use Python scripts decides which operands will be choose. We will implement with `addition, subtraction, and multiplicaton` to test with design.
+  - The syntax `additional`: python3 Test_TranAndRecei.py /dev/pts/4 110 101 add
+  - The syntax `additional`: python3 Test_TranAndRecei.py /dev/pts/4 110 101 sub
+  - The syntax `additional`: python3 Test_TranAndRecei.py /dev/pts/4 110 101 mul
+  - The syntax `additional`: python3 Test_TranAndRecei.py /dev/pts/4 110 101 div
   | TOP MODULE FILE                 |      TEST PYTHON FILE                                      |
   | ---------------                 |     --------------------------------------------------------------------------              |
   |`./TranAndRecei`                 | `python3 Test_TranAndRecei.py /dev/pts/4 110 101 add`      |
