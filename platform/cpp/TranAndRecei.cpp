@@ -8,8 +8,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include "verilated.h"
-#include <iostream>
-#include <cstring>
 #ifdef	USE_UART_LITE
 #include "VTranAndReceilite.h"
 #define	SIMCLASS	VTranAndReceilite
@@ -20,17 +18,12 @@
 #include "verilated_vcd_c.h"
 #include "uartsim.h"
 
-#define LENG 10
-using namespace std;
-
 #define WAVENAME "TranAndRecei.vcd"
 int	main(int argc, char **argv) 
 {
    Verilated::commandArgs(argc, argv);
    UARTSIM		*uart;										// init uart pointer
-   uart_PseudoTerminal *Pseudo;							// Init Pseudo terminal
-   bool		run_interactively = false;
-   int		port = 0;										// Port is zero mean transfer through standard input and output
+   uart_PseudoTerminal Pseudo;							// Init Pseudo terminal
    unsigned	setup = 868;								// init baudrate
    int fd;
 
@@ -51,13 +44,11 @@ int	main(int argc, char **argv)
 
       while (1) // re-open pseudo terminal if closed by client
       {
-         int	nr=1, nw;
-
          // We are the parent
          //close(childs_stdin[ 0]); // Close the read end
          //close(childs_stdout[1]); // Close the write end
 
-         Pseudo->PseudoTerminal_Init(&fd);						// Init Pesudo Terminal
+         Pseudo.PseudoTerminal_Init(&fd);						// Init Pesudo Terminal
 
          pid_t childs_pid = fork();
          if (childs_pid != 0) 
@@ -66,9 +57,9 @@ int	main(int argc, char **argv)
 
             while (1)
             {
-               if (Pseudo->PseudoTerminal_readByte(fd, &Buffer) < 0)
+               if (Pseudo.PseudoTerminal_readByte(fd, &Buffer) < 0)
                {
-                  fprintf(stderr, "error read\n");
+                  fprintf(stderr, "re-open pts\n");
                   break;
                }
 
@@ -76,21 +67,19 @@ int	main(int argc, char **argv)
             }
 
             kill(childs_pid, SIGTERM);
+            int stat;
+            wait(&stat);
 
-            sleep(1);
-
-            Pseudo->PseudoTerminal_Deinit(fd);
+            Pseudo.PseudoTerminal_Deinit(fd);
          }
          else
          { // the child
-            char Buffer[100];
-
             while(1)
             {
                char a;
                read(childs_stdout[0],&a, 1);
 
-               Pseudo->PseudoTerminal_writeByte(fd,a);
+               Pseudo.PseudoTerminal_writeByte(fd,a);
             }
          }
       }
@@ -126,10 +115,7 @@ int	main(int argc, char **argv)
       uart->setup(setup);
 
       // Make sure we don't run longer than 4 seconds ...
-      time_t	start = time(NULL);
-      int	iterations_before_check = 2048;
       unsigned	clocks = 0;
-      bool	done = false;
 
       // VCD trace setup
 #define	VCDTRACE

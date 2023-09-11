@@ -164,7 +164,7 @@ class uart_PseudoTerminal
 	//	int fd;
 	public:
 	/**********Public member function*************/
-		uart_PseudoTerminal(/* args */);
+		//uart_PseudoTerminal(/* args */);
 		/*PseudoTerminal_Init(int*fd)
 		To initialize the parameter of the starting to transfer
 		*/

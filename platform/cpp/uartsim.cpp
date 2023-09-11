@@ -385,11 +385,8 @@ void uart_PseudoTerminal::PseudoTerminal_readData(int fd,char* Buffer)
 
 int uart_PseudoTerminal::PseudoTerminal_readByte(int fd, char *buf)
 {
-    ssize_t n = read(fd, buf, 1);	//Read Data via Peseudo
-        if (n < 0) {						//If no read any data
-            perror("read");
-            return -1;
-        } 
+    if (read(fd, buf, 1) < 0)
+       return -1;
 
    printf("read %02x\n", *buf);
 
@@ -409,12 +406,8 @@ void uart_PseudoTerminal::PseudoTerminal_writeData(int fd,char* Buffer)
 
 int uart_PseudoTerminal::PseudoTerminal_writeByte(int fd, unsigned char Buffer)
 {
-   ssize_t n = write(fd, &Buffer, 1); //Write the data with the size is the length of the buffer data
-
-   if (n < 0) {
-      perror("write");
+   if (write(fd, &Buffer, 1) < 0)
       return -1;
-   }
 
    printf("Sent 1 byte: %02x\n", Buffer);
 

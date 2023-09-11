@@ -14,7 +14,7 @@ MODULES2:= Data_Receiver
 
 SOURCES := $(MODULES2).cpp $(MODULES).cpp uartsim.cpp uartsim.h
 ## }}}
-all:	$(OBJDIR)/ $(MODULES2) $(MODULES) test
+all:	$(OBJDIR)/ $(MODULES2) $(MODULES)
 
 
 # Verilator's generated Makefile sets VM_*
@@ -49,9 +49,9 @@ $(MODULES): $(TOPOBJS) $(VOBJDR)/V$(MODULES)__ALL.a
 	$(CXX) $(FLAGS) $(INCS) $^ -lpthread -o $@
 ## test
 ## {{{
-test:
+#test:
 #	./$(MODULES2)
-	./$(MODULES)
+#	./$(MODULES)
 #
 define	build-depends
 	$(mk-objdir)
