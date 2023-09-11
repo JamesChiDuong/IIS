@@ -173,9 +173,11 @@ class uart_PseudoTerminal
 		To read Data and store data into the Buffer
 		*/
 		void PseudoTerminal_readData(int fd,char* Buffer);
+		int PseudoTerminal_readByte(int fd, char* buf);
 		/*PseudoTerminal_writeData(int fd,char* Buffer)
 		To write the Buffer data
 		*/
+		int PseudoTerminal_writeByte(int fd, unsigned char Buffer);
 		void PseudoTerminal_writeData(int fd,char* Buffer);
 		/*PseudoTerminal_Deinit(int fd);
 		To close the port

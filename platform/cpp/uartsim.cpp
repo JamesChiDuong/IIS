@@ -382,6 +382,19 @@ void uart_PseudoTerminal::PseudoTerminal_readData(int fd,char* Buffer)
         }
     } 
 }
+
+int uart_PseudoTerminal::PseudoTerminal_readByte(int fd, char *buf)
+{
+    ssize_t n = read(fd, buf, 1);	//Read Data via Peseudo
+        if (n < 0) {						//If no read any data
+            perror("read");
+            return -1;
+        } 
+
+   printf("read %02x\n", *buf);
+
+   return 0;
+}
 //Pseudo_Terminal::WriteData
 void uart_PseudoTerminal::PseudoTerminal_writeData(int fd,char* Buffer)
 {
@@ -392,6 +405,20 @@ void uart_PseudoTerminal::PseudoTerminal_writeData(int fd,char* Buffer)
     } else {
         printf("Sent %ld bytes: %s\n", n, Buffer);
     }
+}
+
+int uart_PseudoTerminal::PseudoTerminal_writeByte(int fd, unsigned char Buffer)
+{
+   ssize_t n = write(fd, &Buffer, 1); //Write the data with the size is the length of the buffer data
+
+   if (n < 0) {
+      perror("write");
+      return -1;
+   }
+
+   printf("Sent 1 byte: %02x\n", Buffer);
+
+   return 0;
 }
 //Pseudo_Terminal::Deinit
 void uart_PseudoTerminal::PseudoTerminal_Deinit(int fd)

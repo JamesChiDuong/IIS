@@ -53,19 +53,30 @@ initial begin
      tx_current_state = 3'd0;
 end
 
+integer STDERR = 32'h8000_0002;
+
 always @(posedge clk ) begin
     case (rx_current_state)
        START : begin
         if(((rx_data_out == 8'h0C)) &&(rx_done))
+        begin
             rx_next_state <= DATA;
+            $fdisplay(STDERR,"sim rx data");
+        end
        end
        DATA : begin
         if(((rx_data_out == 8'h0A))&&(rx_done))
+        begin
             rx_next_state <= STOP;
+            $fdisplay(STDERR,"sim rx stop");
+        end
        end
        STOP: begin
         if((rx_done))
+        begin
             rx_next_state <= START;
+            $fdisplay(STDERR,"sim rx start");
+        end
        end
         default: rx_next_state <= START;
     endcase
@@ -143,18 +154,21 @@ always @(posedge clk ) begin
         if((rx_current_state==STOP))
         begin
             tx_next_state <= SEND; 
+            $fdisplay(STDERR,"sim tx send");
         end
        end
        SEND : begin
-        if((tx_index > 4'd8))
+        if((tx_index > 4'd6))
         begin
            tx_next_state <= STOP; 
+            $fdisplay(STDERR,"sim tx stop");
         end
        end
        STOP : begin
         if((rx_current_state==START) && (rx_done == 1'b1))
         begin
             tx_next_state <= START;
+            $fdisplay(STDERR,"sim tx start");
         end
        end
         default: tx_next_state <= START;

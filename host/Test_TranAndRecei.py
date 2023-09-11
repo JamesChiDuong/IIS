@@ -62,7 +62,7 @@ print("Send Data: ",hex(input_data))
 dev.write(message)                #Waiting to read data
 
 
-dataRaw = dev.readline()
+dataRaw = dev.read(8)
 
 integer_big_endian = int.from_bytes(dataRaw, 'big')
 hex_data = hex(integer_big_endian)
@@ -119,3 +119,4 @@ print("Result: ", hex(output_result), output_result)
 #hex_int = int(data,16)
 #new_int = data + 0x200
 #data = dataRaw.decode('utf8').strip()            #Decode to string
+
