@@ -25,7 +25,6 @@ def get_hex(value):
   return convert_hex
 
 def get_byte(value,lengOfByte):
-  print("The length of byte: ",int(lengOfByte))
   return value.to_bytes(int(lengOfByte),'big')
 
 if len(sys.argv) < 2:
