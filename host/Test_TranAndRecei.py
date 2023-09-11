@@ -10,7 +10,7 @@ operand = 0
 output_number1 = 0
 output_number2 = 0
 output_result = 0
-
+numOfByte = 0
 BITWISE_12BIT = 0xffffffffffff
 
 def twos_comp(val, bits):
@@ -25,6 +25,7 @@ def get_hex(value):
   return convert_hex
 
 def get_byte(value,lengOfByte):
+  print("The length of byte: ",int(lengOfByte))
   return value.to_bytes(int(lengOfByte),'big')
 
 if len(sys.argv) < 2:
@@ -51,9 +52,12 @@ else:
 
 
 input_data = (int(sys.argv[2]) << 32) | ((int(sys.argv[3]) << 24) | ((int(input_operand) << 16)) | (0x0C<<8) | 0x0A)
-
+if(int(sys.argv[2]) <100):
+  numOfByte = (((input_data.bit_length()+1))/8)+1
+else:
+  numOfByte = (((input_data.bit_length()+1))/8)
 #input_data = (int(sys.argv[2]) << 32) | ((int(sys.argv[3]) << 24) | ((int(input_operand) << 16) | 0x0A))
-message = get_byte(input_data,((input_data.bit_length()+1))/8)
+message = get_byte(input_data,numOfByte)
 
 print("Send Data: ",hex(input_data))
 dev.write(message)                #Waiting to read data
