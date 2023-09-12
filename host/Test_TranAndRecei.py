@@ -33,9 +33,10 @@ if len(sys.argv) < 2:
 
 
 dev = serial.Serial(sys.argv[1], 115200)  #Open serial port
-if((sys.argv[2].isdigit()== False or sys.argv[3].isdigit()== False) or (int(sys.argv[2]) and int(sys.argv[3]) > 255)):
-  print("Error: Please input number or input the data from 0-255")
+if((sys.argv[2].isdigit()== False) or (sys.argv[3].isdigit()== False) or ((int(sys.argv[2]) > 254) or (int(sys.argv[3]) > 254))):
+  print("Error: Please input number or input the data from 0-254")
   exit()
+
 
 if(sys.argv[4] == "add"):
   input_operand = 0x1
@@ -50,7 +51,7 @@ else:
   exit()
 
 
-input_data = (int(sys.argv[2]) << 32) | ((int(sys.argv[3]) << 24) | ((int(input_operand) << 16)) | (0x0C<<8) | 0x0A)
+input_data = (int(sys.argv[2]) << 32) | ((int(sys.argv[3]) << 24) | ((int(input_operand) << 16)) | (0x0C<<8) | 0xFF)
 if(int(sys.argv[2]) <100):
   numOfByte = (((input_data.bit_length()+1))/8)+1
 else:
@@ -82,17 +83,6 @@ if(numberOfbyte == 8):
   operand = (data_filter >> 24) & 0xFF
 
   output_result = (data_filter >> 8) & 0xFFFF
-
-elif(numberOfbyte == 7):
-  output_number1 = (data_filter >> 32) & 0xFF########& (BITWISE_8BIT)
-
-
-  output_number2 = (data_filter >>24) & 0xFF
-
-
-  operand = (data_filter >> 16) & 0xFF
-
-  output_result = (data_filter)  & 0xFF
 
 if(operand == 0x1):
    operand_str = "add"

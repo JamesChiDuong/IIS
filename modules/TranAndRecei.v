@@ -8,7 +8,7 @@ module TranAndRecei (
     output o_uart_tx
 );
 localparam  DBITS = 8,                                  // 8 bit Data
-            DATA_LENGTH = 11,                           // String length of the Data buffer    
+            DATA_LENGTH = 8,                           // String length of the Data buffer    
             BR_BITS = 6,                                // Counter limit
             BR_LIMIT = 53,                              // Baudrate limit
             SB_TICK = 16;                               // Sb tick
@@ -65,7 +65,7 @@ always @(posedge clk ) begin
         end
        end
        DATA : begin
-        if(((rx_data_out == 8'h0A))&&(rx_done))
+        if(((rx_data_out == 8'hFF))&&(rx_done))
         begin
             rx_next_state <= STOP;
             $fdisplay(STDERR,"sim rx stop");
@@ -99,9 +99,9 @@ always @(posedge clk) begin
 end
 /*------Receiver Process--------*/
 always @(posedge clk) begin
-    if((rx_data_out == 8'h0A)&&(rx_done))
+    if((rx_data_out == 8'hFF)&&(rx_done))
         rx_index <= 8'd0;
-    else if(((rx_data_out != 8'h0A))&&(rx_done))
+    else if(((rx_data_out != 8'hFF))&&(rx_done))
         rx_index <= rx_index + 1'b1;
 
 end    
@@ -143,8 +143,8 @@ always @(posedge clk) begin
         tx_Data_Buffer[3] <= selection;
         tx_Data_Buffer[4] <= result >> 8;
         tx_Data_Buffer[5] <= result & 16'h00ff;
-        tx_Data_Buffer[6] <= "\n";
-        tx_Data_Buffer[7] <= 8'h0; 
+        tx_Data_Buffer[6] <= 8'h0A;
+        tx_Data_Buffer[7] <= 8'hFF; 
     end
 end	
 
@@ -158,7 +158,7 @@ always @(posedge clk ) begin
         end
        end
        SEND : begin
-        if((tx_index > 4'd6))
+        if((tx_index == 8'd8))
         begin
            tx_next_state <= STOP; 
             $fdisplay(STDERR,"sim tx stop");
@@ -175,9 +175,9 @@ always @(posedge clk ) begin
     endcase
 end
 always @(posedge clk) begin
-    if((tx_done)&&(tx_index <4'd10))
+    if((tx_done)&&((tx_index != 8'd8)))
         tx_index <= tx_index + 1;
-    else if(tx_index >= 4'd10)
+    else if((tx_done)&&((tx_index == 8'd8)))
         tx_index <= 4'd0;
 end
 always @(posedge clk) begin
@@ -252,4 +252,3 @@ Transmitter
         .tx(o_uart_tx)
      );
 endmodule
-

@@ -51,7 +51,7 @@ $(MODULES): $(TOPOBJS) $(VOBJDR)/V$(MODULES)__ALL.a
 ## {{{
 #test:
 #	./$(MODULES2)
-#	./$(MODULES)
+	./$(MODULES)
 #
 define	build-depends
 	$(mk-objdir)
