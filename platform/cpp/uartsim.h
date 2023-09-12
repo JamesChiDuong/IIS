@@ -104,7 +104,7 @@ public:
 	// Public member functions
 	// 
 
-	UARTSIM();
+	UARTSIM(bool interactive = false);
 	// 
 
 	// kill(void)

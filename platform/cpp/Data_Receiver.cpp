@@ -22,15 +22,37 @@
 int	main(int argc, char **argv) 
 {
    Verilated::commandArgs(argc, argv);
-   UARTSIM		*uart;										// init uart pointer
+
+   UARTSIM *uart;										// init uart pointer
    unsigned	setup = 868;								// init baudrate
+
+   bool run_interactively = false;
+
+
+   for(int argn=1; argn<argc; argn++)
+   {
+      if (argv[argn][0] == '-') for(int j=1; (j<1000)&&(argv[argn][j]); j++)
+         switch(argv[argn][j])
+         {
+            case 'i':
+               run_interactively = true;
+               break;
+            case 's':
+               setup= strtoul(argv[++argn], NULL, 0); j+= 4000;
+               break;
+            default:
+               printf("Undefined option, -%c\n", argv[argn][j]);
+               break;
+         }
+   }
+
 
    // Setup the model and baud rate
    SIMCLASS tb;
    int baudclocks = setup & 0x0ffffff;
    tb.i_uart_rx = 1;
 
-   uart = new UARTSIM();
+   uart = new UARTSIM(run_interactively);
    uart->setup(setup);
 
    // Make sure we don't run longer than 4 seconds ...

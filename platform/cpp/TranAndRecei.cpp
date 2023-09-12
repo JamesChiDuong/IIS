@@ -26,6 +26,20 @@ int	main(int argc, char **argv)
                                                    //uart_PseudoTerminal Pseudo;							// Init Pseudo terminal
    unsigned	setup = 868;								// init baudrate
 
+   for(int argn=1; argn<argc; argn++)
+   {
+      if (argv[argn][0] == '-') for(int j=1; (j<1000)&&(argv[argn][j]); j++)
+         switch(argv[argn][j])
+         {
+            case 's':
+               setup= strtoul(argv[++argn], NULL, 0); j+= 4000;
+               break;
+            default:
+               printf("Undefined option, -%c\n", argv[argn][j]);
+               break;
+         }
+   }
+
    // Setup the model and baud rate
    SIMCLASS tb;
    int baudclocks = setup & 0x0ffffff;

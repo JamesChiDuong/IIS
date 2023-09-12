@@ -50,9 +50,12 @@
 #include "uartsim.h"
 
 
-UARTSIM::UARTSIM()
+UARTSIM::UARTSIM(bool interactive)
 {
-   PseudoTerminal_Init();						// Init Pesudo Terminal
+   if (interactive)
+      fd = -1;
+   else
+      PseudoTerminal_Init();						// Init Pesudo Terminal
 
 	setup(25);	// Set us up for (default) 8N1 w/ a baud rate of CLK/25
 	m_rx_baudcounter = 0;
@@ -61,14 +64,15 @@ UARTSIM::UARTSIM()
 	m_tx_state = TXIDLE;
 }
 
-void	UARTSIM::kill(void)
+void UARTSIM::kill(void)
 {
 	fflush(stdout);
 
-	close(fd);
+   if (fd >= 0)
+      close(fd);
 }
 
-void	UARTSIM::setup(unsigned isetup)
+void UARTSIM::setup(unsigned isetup)
 {
 	if (isetup != m_setup)
    {
@@ -82,7 +86,7 @@ void	UARTSIM::setup(unsigned isetup)
 	}
 }
 
-int	UARTSIM::rawtick(const int i_tx, const bool network)
+int UARTSIM::rawtick(const int i_tx, const bool network)
 {
 	int	o_rx = 1;
 
@@ -110,10 +114,14 @@ int	UARTSIM::rawtick(const int i_tx, const bool network)
 
          char buf;
          buf = (m_rx_data >> (32-m_nbits-m_nstop-m_nparity))&0x0ff;
-         if (1 != write(fd, &buf, 1)) // Client disconnected; restart pts.
-         {
-            close(fd);
-            PseudoTerminal_Init();
+
+         if (1 != write((this->fd >= 0) ? this->fd : STDOUT_FILENO, &buf, 1)) 
+         { // Client disconnected; restart pts.
+            if (fd >= 0)
+            {
+               close(fd);
+               PseudoTerminal_Init();
+            }
          }
       }
       else
@@ -140,19 +148,22 @@ int	UARTSIM::rawtick(const int i_tx, const bool network)
 	if (m_tx_state == TXIDLE)
    {
 		struct	pollfd	pb;
-		pb.fd = fd;
+		pb.fd = (this->fd >= 0) ? this->fd : STDIN_FILENO;
 		pb.events = POLLIN;
       if (poll(&pb, 1, 0) < 0) // Client disconnected; restart pts.
       {
-         close(fd);
-         PseudoTerminal_Init();
+         if (fd >= 0)
+         {
+            close(fd);
+            PseudoTerminal_Init();
+         }
       }
 
 		if (pb.revents & POLLIN)
       {
-			char	buf;
+			char buf;
 
-			if (1 == read(fd, &buf, 1))
+			if (1 == read((this->fd >= 0) ? this->fd : STDIN_FILENO, &buf, 1))
          {
 				m_tx_data = (-1<<(m_nbits+m_nparity+1))
 					// << nstart_bits
@@ -183,9 +194,12 @@ int	UARTSIM::rawtick(const int i_tx, const bool network)
 			}
          else // Client disconnected; restart pts.
          {
-            close(fd);
-            PseudoTerminal_Init();
-			}
+            if (fd >= 0)
+            {
+               close(fd);
+               PseudoTerminal_Init();
+            }
+         }
 		}
 	}
    else if (m_tx_baudcounter <= 0)
